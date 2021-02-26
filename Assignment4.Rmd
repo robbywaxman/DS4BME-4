@@ -1,0 +1,22 @@
+---
+title: "Assignment4"
+author: "Robby Waxman"
+date: "2/26/2021"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Question 1
+```{r}
+#Install and import libraries if needed
+if (!require('tidyverse')) install.packages('tidyverse')
+library('tidyverse')
+if (!require('devtools')) install.packages('devtools')
+library('devtools')
+devtools::install_github("bcaffo/MRIcloudT1volumetrics")
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
