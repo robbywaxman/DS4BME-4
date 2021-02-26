@@ -17,6 +17,15 @@ library('tidyverse')
 if (!require('devtools')) install.packages('devtools')
 library('devtools')
 devtools::install_github("bcaffo/MRIcloudT1volumetrics")
+MRIcloudT1volumetrics::readFileList("https://raw.githubusercontent.com/neuroconductor/kirby21.mricloud/master/inst/visit_1/127/kirby_3_1_ax_283Labels_M2_corrected_stats.txt")
+```
+
+```{r}
+fileLoc = system.file("extdata",
+"kirby127a_3_1_ax_283Labels_M2_corrected_stats.txt",
+package="MRIcloudT1volumetrics")
+test = MRIcloudT1volumetrics::readSubject(fileLoc)
+test[[1]]
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.

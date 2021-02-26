@@ -1869,6 +1869,29 @@ devtools::install_github(&quot;bcaffo/MRIcloudT1volumetrics&quot;)</code></pre>
 ## 834 35.4827    2     5  1 1378295 1268519
 ## 835 36.2548    2     5  1 1378295 1268519
 ## 836 40.7481    2     5  1 1378295 1268519</code></pre>
+<pre class="r"><code>fileLoc = system.file(&quot;extdata&quot;,
+&quot;kirby127a_3_1_ax_283Labels_M2_corrected_stats.txt&quot;,
+package=&quot;MRIcloudT1volumetrics&quot;)
+test = MRIcloudT1volumetrics::readSubject(fileLoc)
+test[[1]]</code></pre>
+<pre><code>##                  rawid             roi volume min max     mean     std type
+## 1 kirby127a_3_1_ax.img Telencephalon_L 531111   0 374 128.3013 51.8593    1
+## 2 kirby127a_3_1_ax.img Telencephalon_R 543404   0 300 135.0683 53.6471    1
+## 3 kirby127a_3_1_ax.img  Diencephalon_L   9683  15 295 193.5488 32.2733    1
+## 4 kirby127a_3_1_ax.img  Diencephalon_R   9678  10 335 193.7051 32.7869    1
+## 5 kirby127a_3_1_ax.img   Mesencephalon  10268  55 307 230.8583 29.2249    1
+## 6 kirby127a_3_1_ax.img   Metencephalon 159402   2 299 138.5200 52.2241    1
+## 7 kirby127a_3_1_ax.img  Myelencephalon   4973  12 286 199.8497 36.6501    1
+## 8 kirby127a_3_1_ax.img             CSF 109776   0 258  33.0193 26.3262    1
+##   level
+## 1     1
+## 2     1
+## 3     1
+## 4     1
+## 5     1
+## 6     1
+## 7     1
+## 8     1</code></pre>
 <p>Note that the <code>echo = FALSE</code> parameter was added to the code chunk to prevent printing of the R code that generated the plot.</p>
 </div>
 
