@@ -16,6 +16,8 @@ if (!require('tidyverse')) install.packages('tidyverse')
 library('tidyverse')
 if (!require('devtools')) install.packages('devtools')
 library('devtools')
+if (!require('ggplot2')) install.packages('ggplot2')
+library('ggplot2')
 devtools::install_github("bcaffo/MRIcloudT1volumetrics")
 MRIcloudT1volumetrics::readFileList("https://raw.githubusercontent.com/neuroconductor/kirby21.mricloud/master/inst/visit_1/127/kirby_3_1_ax_283Labels_M2_corrected_stats.txt")
 ```
@@ -35,7 +37,22 @@ So according to the calculation, there is a total volume in level 1 type 1 of 13
 
 ## Question 2
 Read in the class data from here https://github.com/bcaffo/ds4bme/blob/master/data/classInterests.txt. Use ggplot to create bar plots of year and program.
-```{r}
 
+First I do Year:
+```{r}
+filename <- "https://raw.githubusercontent.com/bcaffo/ds4ph-bme/master/data/classInterests.txt"
+interests <- read.delim(filename, header = TRUE, sep = "\t")
+ggplot(interests, aes(x=factor(Year)))+
+  geom_bar(stat="count", width=0.7, fill="steelblue")+
+  theme_minimal() + ggtitle("Bar Plot of Year") +
+  xlab("Year") + ylab("Count")
+```
+
+Next I do Program
+```{r}
+ggplot(interests, aes(x=factor(Program)))+
+  geom_bar(stat="count", width=0.7, fill="steelblue")+
+  theme_minimal() + ggtitle("Bar Plot of Program") +
+  xlab("Program") + ylab("Count")
 ```
 
