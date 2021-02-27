@@ -20,8 +20,11 @@ if (!require('ggplot2')) install.packages('ggplot2')
 library('ggplot2')
 if (!require('ggmosaic')) install.packages('ggmosaic')
 library('ggmosaic')
+
 devtools::install_github("bcaffo/MRIcloudT1volumetrics")
 MRIcloudT1volumetrics::readFileList("https://raw.githubusercontent.com/neuroconductor/kirby21.mricloud/master/inst/visit_1/127/kirby_3_1_ax_283Labels_M2_corrected_stats.txt")
+
+
 ```
 ## Question 1
 Download the first Kirb21 subject data here. Use this package to read in the first subject. Calculate and report the intracranial volume: the sum of the level 1 type 1 volumes.
@@ -69,7 +72,7 @@ ggplot(data = interests) +
 ## Question 4
 Download the gene expression dataset from here. Information about the data can be found in the sample info here. From the gene expression data matrix, subtract the rowmean from each row and the column mean from each column so that you have a new matrix that has been demeaned across both rows and columns.
 
-```{r}
+```{r, warning = FALSE}
 filename <- 'https://raw.githubusercontent.com/jhu-advdatasci/2018/master/data/GSE5859_exprs.csv'
 dat <- read_csv(filename)
 dat$X1 <- NULL
@@ -77,5 +80,34 @@ dat <- dat - rowMeans(dat)
 dat <- dat - colMeans(dat)
 #I decide to print out a few entries just to show the change
 print(dat[1:4,1:4])
+```
+
+## Question 5
+Download the data from here. Create plots of healthcare spending versus time color coded by states.
+```{r}
+dat <- read_csv("https://raw.githubusercontent.com/jhu-advdatasci/2018/master/data/KFF/healthcare-spending.csv", skip = 2,  n_max = 52)
+names(dat)[2:25] <- c("1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014")
+long_data<- dat %>% gather(key = "Year" , value = "Spending", c(-"Location"))
+long_data$Spending=as.numeric(as.character(long_data$Spending))
+long_data$Year <- as.numeric(as.vector(long_data$Year))
+head(long_data)
+```
+
+```{r}
+p<-ggplot(long_data, aes(x=Year, y=Spending, group=Location)) +
+  geom_line(aes(color=Location))+
+  geom_point(aes(color=Location))+
+  labs(title='Healthcare Spending vs. Time by State')
+p + theme(legend.position="bottom")
+```
+
+## Question 5
+Refer to the previous data. Create a barplot of average health care spending by state. This one sadly is a little messy
+```{r}
+dat$Avg <- rowMeans(dat[,2:25])
+p<-ggplot(data=dat, aes(x=Location, y=Avg)) +
+  geom_bar(stat="identity") +
+  labs(title='Average Healthcare Spending by State')
+p
 ```
 
