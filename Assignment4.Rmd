@@ -18,6 +18,8 @@ if (!require('devtools')) install.packages('devtools')
 library('devtools')
 if (!require('ggplot2')) install.packages('ggplot2')
 library('ggplot2')
+if (!require('ggmosaic')) install.packages('ggmosaic')
+library('ggmosaic')
 devtools::install_github("bcaffo/MRIcloudT1volumetrics")
 MRIcloudT1volumetrics::readFileList("https://raw.githubusercontent.com/neuroconductor/kirby21.mricloud/master/inst/visit_1/127/kirby_3_1_ax_283Labels_M2_corrected_stats.txt")
 ```
@@ -54,5 +56,13 @@ ggplot(interests, aes(x=factor(Program)))+
   geom_bar(stat="count", width=0.7, fill="steelblue")+
   theme_minimal() + ggtitle("Bar Plot of Program") +
   xlab("Program") + ylab("Count")
+```
+
+## Question 3
+Create a mosaic plot of the class data for year and program. It ends up a bit messy
+```{r}
+ggplot(data = interests) +
+  geom_mosaic(aes(x = product(Year, Program), fill=Year)) + 
+  labs(title='Mosaic Plot of Year and Program')
 ```
 
