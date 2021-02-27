@@ -66,3 +66,16 @@ ggplot(data = interests) +
   labs(title='Mosaic Plot of Year and Program')
 ```
 
+## Question 4
+Download the gene expression dataset from here. Information about the data can be found in the sample info here. From the gene expression data matrix, subtract the rowmean from each row and the column mean from each column so that you have a new matrix that has been demeaned across both rows and columns.
+
+```{r}
+filename <- 'https://raw.githubusercontent.com/jhu-advdatasci/2018/master/data/GSE5859_exprs.csv'
+dat <- read_csv(filename)
+dat$X1 <- NULL
+dat <- dat - rowMeans(dat)
+dat <- dat - colMeans(dat)
+#I decide to print out a few entries just to show the change
+print(dat[1:4,1:4])
+```
+
