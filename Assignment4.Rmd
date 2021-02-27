@@ -9,8 +9,8 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## Question 1
-```{r}
+
+```{r, warning = F, results = "hide"}
 #Install and import libraries if needed
 if (!require('tidyverse')) install.packages('tidyverse')
 library('tidyverse')
@@ -19,13 +19,23 @@ library('devtools')
 devtools::install_github("bcaffo/MRIcloudT1volumetrics")
 MRIcloudT1volumetrics::readFileList("https://raw.githubusercontent.com/neuroconductor/kirby21.mricloud/master/inst/visit_1/127/kirby_3_1_ax_283Labels_M2_corrected_stats.txt")
 ```
+## Question 1
+Download the first Kirb21 subject data here. Use this package to read in the first subject. Calculate and report the intracranial volume: the sum of the level 1 type 1 volumes.
 
 ```{r}
 fileLoc = system.file("extdata",
 "kirby127a_3_1_ax_283Labels_M2_corrected_stats.txt",
 package="MRIcloudT1volumetrics")
 test = MRIcloudT1volumetrics::readSubject(fileLoc)
-test[[1]]
+print(test[[1]])
+print(sum(test[[1]]$volume))
+```
+So according to the calculation, there is a total volume in level 1 type 1 of 1378295
+
+
+## Question 2
+Read in the class data from here https://github.com/bcaffo/ds4bme/blob/master/data/classInterests.txt. Use ggplot to create bar plots of year and program.
+```{r}
+
 ```
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
